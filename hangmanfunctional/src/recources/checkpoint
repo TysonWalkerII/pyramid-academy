@@ -1,0 +1,214 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static String[] randomWords = { "Terminator", "Slicer","Ninja", "cow", "Robot", "littlegirl" };
+    public static String wordToGuess = randomWords[(int) (Math.random() * randomWords.length)];
+    private static String underscores = new String(new char[wordToGuess.length()]).replace("\0", "_");
+    public static ArrayList<String> missedLetters = new ArrayList<String>();
+    public static int highscore = 0;
+    public static int howManyWrong = 0;
+    public static String newunderscore = "";
+    public static String choicemade = "yes";
+
+
+
+
+    public static void hangImage(){
+       if(howManyWrong ==0){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+              List<String> lineidk = Files.readAllLines(path);
+              for(int i = 1;i<8;i++){
+                  System.out.println(lineidk.get(i));
+              }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==1){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 9;i<15;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==2){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 16;i<22;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==3){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 16;i<22;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==4){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 23;i<29;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==5){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 30;i<36;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==6){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 37;i<43;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+        }else if(howManyWrong ==7){
+            Path path = Paths.get("C://Users//tywal//IdeaProjects//hangmanfunctional//src//recources//hangman.text");
+            try {
+                List<String> lineidk = Files.readAllLines(path);
+
+                for(int i = 44;i<=48;i++){
+                    System.out.println(lineidk.get(i));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Missed letters:\n"+missedLetters);
+            System.out.println(underscores);
+            System.out.println("Guess a letter.");
+
+        }
+
+    }
+    public static void runGame(){
+        System.out.println("H A N G M A N\n");
+        do{
+            hangImage();
+            newunderscore="";
+            Scanner letter = new Scanner(System.in);
+            String guess = letter.next();
+            String[] wtg= wordToGuess.split("");
+            Arrays.stream(wtg).forEach(n->{if(guess.equals(n)){
+                newunderscore += guess;
+            }else if(underscores.charAt(wordToGuess.indexOf(n)) != '_'){
+                newunderscore += wordToGuess.charAt(wordToGuess.indexOf(n));
+            }
+            else if(!missedLetters.contains(guess) && !wordToGuess.contains(guess)){
+                missedLetters.add(guess);
+                newunderscore+="_";
+            }else if(missedLetters.contains(guess) && wordToGuess.contains(guess)){
+                newunderscore += "_";
+            }else{
+                newunderscore += "_";
+            }});
+            //------------------------------------------------------------------------------------------------------
+
+            //------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
+
+            if(underscores.equals(newunderscore)){
+                howManyWrong++;
+            }else{
+                underscores =newunderscore;
+            }
+            //---------------------------------------------------------------------------------------------------------
+
+
+                      if((howManyWrong>7)||!underscores.contains("_")){
+                System.out.println("NOTICED!!!"+underscores);
+                if(underscores.equals(wordToGuess)){
+                    System.out.println("Yes! The secret word is "+underscores+"! You have won!");
+                    System.out.println("Continue");
+                   Scanner scanner = new Scanner(System.in);
+                    choicemade = scanner.next();
+                    wordToGuess = randomWords[(int) (Math.random() * randomWords.length)];
+                    underscores = new String(new char[wordToGuess.length()]).replace("\0", "_");
+                    howManyWrong=0;
+                    missedLetters.clear();
+                }else{
+                    System.out.println("+---+\n" +
+                            "  |   |\n" +
+                            "  O   |\n" +
+                            " /|\\  |\n" +
+                            " / \\  |\n" +
+                            "      |\n" +
+                            "=========");
+                    System.out.println("GAME OVER! The word was " + wordToGuess);
+                  System.out.println("Continue?");
+                  Scanner scanner = new Scanner(System.in);
+                    choicemade = scanner.next();
+                    wordToGuess = randomWords[(int) (Math.random() * randomWords.length)];
+                    underscores = new String(new char[wordToGuess.length()]).replace("\0", "_");
+                    howManyWrong=0;
+                    missedLetters.clear();
+                }
+            }
+        }while(choicemade.equals("yes"));
+    }
+    public static void main(String[] args){
+            runGame();
+
+        }
+
+}
+
+
+
